@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>播众后台登陆</title>
+    <!-- Bootstrap -->
+    <link href="__STATIC__/admin/css/bootstrap.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .title{
+            background-color: #2A333D;
+            padding: 0.5% 0;
+        }
+        .logo{
+            background-image: url("__STATIC__/admin/image/logo.png");
+            background-size:100% 100%;
+            width: 60px;
+            height: 30px;
+            margin: 0 4%;
+        }
+        .search{
+            right:20px;
+        }
+        .ico{
+            color: #9BA3AD;
+            font-size: 3rem;
+        }
+        body{
+            background-color: #F7F7F7;
+        }
+        .list{
+            margin-top:6%;
+            text-align: center;
+        }
+        .list>div{
+            padding:5%;
+            border-bottom: 1px solid #DAE1E8;
+
+        }
+        a{
+            color: #98A6B7;
+            font-size: 1.4rem;
+        }
+        a>span{
+            font-size:2.4rem;
+            margin-right: 5%;
+        }
+        .content{
+            background-color: #FFFFFF;
+            border: 1px solid #DAE1E8;
+        }
+
+        .content_title{
+            font-family: "Microsoft YaHei UI";
+            font-size: 3.6rem;
+            color: #000000;
+            padding:2%;
+            border-bottom: 4px solid #DAE1E8;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="title">
+        <div class="container-fluid">
+            <div class="col-xs-12">
+                <a href="/admin/articles">
+                    <div class="col-xs-2 logo"></div>
+                </a>
+                <div class="col-xs-7"></div>
+                <div class="col-xs-3">
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" placeholder="Search">
+                        <span class="glyphicon glyphicon-search form-control-feedback search"></span>
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="#"><span class="glyphicon glyphicon-user ico"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="subject">
+        <div class="container-fluid">
+            <div class="col-xs-1 list">
+                <div>
+                    <a href="/admin/articles">
+                        <span class="glyphicon glyphicon-file"></span>
+                        文章管理
+                    </a>
+                </div>
+                <div>
+                    <a href="/admin/users">
+                        <span class="glyphicon glyphicon-user"></span>
+                        用户管理
+                    </a>
+                </div>
+                <div>
+                    <a href="/admin/informations">
+                        <span class="glyphicon glyphicon-list-alt"></span>
+                        资讯管理
+                    </a>
+                </div>
+                <div>
+                    <a href="/admin/feedback">
+                        <span class="glyphicon glyphicon-comment"></span>
+                        用户反馈
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-11 content">
+                <div class="content_title col-xs-11">
+                    Article Management
+                </div>
+                <div class="content_title col-xs-1">
+                    <button class="btn btn-success" data-toggle="modal" data-target="#addArticle">新增文章</button>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <td class="col-md-1">ID</td>
+                            <td class="col-md-4">文章标题</td>
+                            <td class="col-md-1">发布日期</td>
+                            <td class="col-md-1">来源公众号</td>
+                            <td class="col-md-2">来源公众号ID</td>
+                            <td class="col-md-1">展示类型</td>
+                            <td class="col-md-2">更多操作</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {foreach $result as $key=> $value}
+                        <tr>
+                            <td class="col-md-1">{$value.id}</td>
+                            <td class="col-md-4">{$value.title}</td>
+                            <td class="col-md-1">{$value.date}</td>
+                            <td class="col-md-2">{$value.sourceName}</td>
+                            <td class="col-md-1">{$value.sourceNum}</td>
+                            <td class="col-md-1">{$value.type == 1 ? '小图':'大图'}</td>
+                            <td class="col-md-2">
+                                <button class="btn btn-info" data-toggle="modal" data-target="#viewDetail_{$value.id}">
+                                    <span class="glyphicon glyphicon-zoom-in"></span>
+                                </button>
+                                <button class="btn btn-danger" data-toggle="modal" data-target="#del_{$value.id}">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        {/foreach}
+                    </tbody>
+                </table>
+                <div class="col-xs-8"></div>
+                <div class="col-xs-4">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination ">
+                            <li><a href='?page=1'>首页</a></li>
+                            {if $page>1}
+                                <li><a href='?page={$page-1}'>上一页</a></li>
+                            {else /}
+                                <li class='disabled'><a>上一页</a></li>
+                            {/if}
+                            {if $page>2}
+                                <li><a href='?page={$page-2}'>{$page-2}</a></li>
+                            {/if}
+                            {if $page>1}
+                                <li><a href='?page={$page-1}'>{$page-1}</a></li>
+                            {/if}
+                            <li class="active"><a href='?page={$page}'>{$page}</a></li>
+                            {if $pageCount>$page}
+                                <li><a href='?page={$page+1}'>{$page+1}</a></li>
+                            {/if}
+                            {if $pageCount>$page+1}
+                                <li><a href='?page={$page+2}'>{$page+2}</a></li>
+                            {/if}
+                            {if $pageCount>$page}
+                                <li><a href='?page={$page+1}'>下一页</a></li>
+                            {else /}
+                                <li class='disabled'><a>下一页</a></li>
+                            {/if}
+                            <li><a href='?page={$pageCount}'>末页</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增文章弹框模块 -->
+    <div class="modal fade" id="addArticle" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h2 class="modal-title" id="myModal">添加文章</h2>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="post" action="/admin/articles/addArticle">
+                        <input style="width: 500px" id="account" type="text" name="url" class="form-control" placeholder="输入微信文章链接" >
+                        <div class="form-inline">
+                            <label class="radio">
+                                <input class="form-control " type="radio" value="0" id="inlineradio1" name="type" checked>大图
+                            </label>
+                            <label class="radio">
+                                <input class="form-control " type="radio" value="1" id="inlineradio2" name="type">小图
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-sm">确认</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--文章详情模块-->
+    {foreach $result as $key=> $value}
+    <div class="modal fade" id="viewDetail_{$value.id}">
+        <div class='modal-dialog'>
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+                    <h4 class='modal-title' id='myModalLabel1'>文章详细</h4>
+                </div>
+                <div class='modal-body'>
+                    <table class='table table-hover'>
+                        <thead>
+                            <tr>
+                                <td>标题</td>
+                                <td>内容</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>文章标题</td><td>{$value.title}</td></tr>
+                            <tr><td>发布日期</td><td>{$value.date}</td></tr>
+                            <tr><td>来源公众号名</td><td>{$value.sourceName}</td></tr>
+                            <tr><td>来源公众号ID</td><td>{$value.sourceNum}</td></tr>
+                            <tr><td>原文链接</td><td>{$value.url}</td></tr>
+                            {if $value.type == 0}
+                                <tr><td>展示类型</td><td>大图</td></tr>
+                            {else if value.type == 1}
+                                <tr><td>展示类型</td><td>小图</td></tr>
+                            {/if}
+                        </tbody>
+                    </table>
+                </div>
+                <div class='modal-footer'>
+                    <button type='button' class='btn btn-default' data-dismiss='modal'>确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {/foreach}
+
+    <!--删除模块-->
+    {foreach $result as $key=> $value}
+    <div class="modal fade" id="del_{$value.id}">
+        <div class='modal-dialog'>
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+                    <h4 class='modal-title' id='myModalLabel'>删除确认</h4>
+                </div>
+                <div class='modal-body'>
+                    是否删除该文章？
+                </div>
+                <div class='modal-footer'>
+                    <button type='button' class='btn btn-default' data-dismiss='modal'>关闭</button>
+                    <a href="/admin/articles/delArticle?id={$value.id}">
+                        <button type="button" class="btn btn-primary">确定</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {/foreach}
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="__STATIC__/admin/js/jquery-3.1.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="__STATIC__/admin/js/bootstrap.min.js"></script>
+</body>
+</html>

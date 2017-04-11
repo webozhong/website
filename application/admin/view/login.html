@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>播众后台登陆</title>
+    <!-- Bootstrap -->
+    <link href="__STATIC__/admin/css/bootstrap.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        body{
+            background-image: url("__STATIC__/admin/image/background.jpg");
+            background-size:100% 100%;
+            background-attachment: fixed;
+        }
+        .login{
+            background-image: url("__STATIC__/admin/image/loginBackground.png");
+            width: 374px;
+            height: 310px;
+            margin-top: 10%;
+        }
+        .login_title{
+            margin-top: 15%;
+            text-align: center;
+            color: #000000;
+            font-family:"Trebuchet MS";
+            font-size: 2.2rem;
+        }
+        .user,.pass{
+            margin: 4% 0;
+            border: solid #ACB6C3;
+        }
+        .btn{
+            margin-top: 10%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="col-xs-5"></div>
+        <form name="LoginForm" action="{:url('/admin/login/login')}" method="post" onsubmit="return InputCheck(this)">
+            <div class="col-xs-2 login">
+                <div class="col-xs-12 login_title">LOGIN</div>
+                <div class="input-group input-group-lg col-xs-12">
+                    <input name="username" type="text" class="form-control user " placeholder="Username">
+                </div>
+                <div class="input-group input-group-lg col-xs-12">
+                    <input name="password" type="password" class="form-control pass" placeholder="Password">
+                </div>
+                <button type="submit" class="col-xs-12 btn btn-lg btn-success">登陆</button>
+            </div>
+        </form>
+    </div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="__STATIC__/admin/js/jquery-3.1.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="__STATIC__/admin/js/bootstrap.min.js"></script>
+</body>
+</html>
