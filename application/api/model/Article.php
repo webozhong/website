@@ -29,4 +29,18 @@ class Article extends Model
         return $result;
     }
 
+    /**保存用户反馈信息
+     * @param $message
+     * @param $number
+     * @return int|string
+     */
+    public static function SaveFeedback($message,$number){
+        $data = [
+            'message' => $message,
+            'number' =>$number
+        ];
+        $result = Db::table('feedbacks')
+            ->insert($data);
+        return $result;
+    }
 }

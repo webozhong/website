@@ -5,7 +5,7 @@ use think\Model;
 class Article extends Model {
 
     /**
-     * 根据page返回10条文章记录
+     * 根据page参数显示记录每页10条
      * @param $page
      * @return array
      */
@@ -20,7 +20,7 @@ class Article extends Model {
 
 
     /**
-     * 获取文章总数
+     * 获取所有文章数量
      * @return int|string
      */
     public static function GetTotal()
@@ -31,7 +31,7 @@ class Article extends Model {
     }
 
     /**
-     * 添加新文章
+     * 添加新文章，向articles表中添加记录
      * @param $title
      * @param $date
      * @param $sourceName
@@ -60,7 +60,7 @@ class Article extends Model {
     }
 
     /**
-     * 根据文章id获得文章内容
+     * 根据文章id获得这篇文章的thumbnails字段
      * @param $id
      * @return array
      */

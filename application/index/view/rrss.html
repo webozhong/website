@@ -14,62 +14,86 @@
 		<base target="_blank" />
 	</head>
 	<style>
-	#logo{
+		body{
+			background-color: #e1d2bc;
+		}
+		/*头部*/
+		#header{
+			height:60px;
+			padding:10px;
+			background-color: #dbdab7;
+		}
+		#header div{
+			height:100%;
+			padding:0;
+			margin-right:10px;
+		}
+		#header div a{
+			display:inline-block;
+			height:100%;
+		}
+		#logo{
 			height: 100%;
 		}
-				#nav>li>h4>a:hover{
+		/*内容部分*/
+		#box{
+			background-color: #f8f8f0;
+		}
+		#nav>li>h4>a:hover{
 			color: #406599;
 		}
 		#nav{
 			padding:0 10px;
 		}
 		#nav>li{
-					border-bottom: 1px solid #dfdfdf;
+			border-bottom: 1px solid #dfdfdf;
 			margin: 20px 0 0 0;
 		}
 		li{
-			list-style-type: none;		}
+			list-style-type: none;
+		}
 		@media only screen and (min-width:759px ){
-				.container{
+		.container{
 			width: 760px;
 		}
-			#nav>li>h4>a{
+		#nav>li>h4>a{
 			color:#000000;
 			text-decoration: none;
 			font-family: "幼圆";
 			font-weight: 700;
 			font-size:1.2em;
 		}
-		
+
 		#nav>.one>a{
+			display:inline-block;
 			height:120px ;
 			overflow: hidden;
 		}
-		#nav>.one{
+			#nav>.one{
 			padding: 0 0 40px;
-}
+		}
 		#nav>.one>h4{
 			display: inline-block;
 			width: 400px;
 			margin: 30px  0 0 10px;
 		}
-		#nav>.one>p{
+			#nav>.one>p{
 			margin: 30px  0 0 260px;
 		}
-		#nav>.one>a>img,#nav>.three>a>img{
+			#nav>.one>a>img,#nav>.three>a>img{
 			width: 100%;
 		}
 		.three>a{
 			display:inline-block;
 			height:120px;
 			overflow: hidden;
-		}	
+		}
 		}
 		@media only screen and (max-width:759px ) {
 
 		.three>a{
 			display:inline-block;
-			height:60px;
+			height:80px;
 			overflow: hidden;
 		}
 		.three>a>img{
@@ -77,7 +101,7 @@
 		}
 		.one>a{
 			display:inline-block;
-			height: auto;
+			height: 180px;
 			overflow: hidden;
 		}
 		.one>a>img{
@@ -101,35 +125,50 @@
 		}
 		}
 	</style>
-	<body style="background-color:#e1d2bc;">
-		<div id="header" class="container" style="padding: 10px;background-color: #dbdab7;">
-				<div class="col-xs-3 col-sm-2" style="height: 40px;padding: 0 ; margin-right:10px ;">
-					<a href="http://www.webozhong.com" style="display: inline-block;height: 100%;">
+
+	<body >
+		<div id="header" class="container" >
+				<div class="col-xs-3 col-sm-2" >
+					<a href="http://www.webozhong.com" >
 					<image id="logo" src="__STATIC__/home/image/logo.png"></image>
 					</a>
 				</div>
-				<div class="col-xs-8" style="padding: 0;">
+				<div class="col-xs-8">
 					<h1 style="margin: 0;">遇见书画</h1>
 				</div>
-			</div>
-		<div id="app" >
-			<div class="container" style="padding: 0;background-color: #f8f8f0;">
-				<simple-grid :data-list="gridData" :columns="gridColumns">
-				</simple-grid>
-			</div>
 		</div>
-		<template id="grid-template">
-			<ul id="nav" >
-				<li style="clear: both;" v-for="i in dataList" v-bind:class="[i.type>0?'three':'one']">
-						<h4><a v-bind:href="i.sourceURL">{{i.title}}</a></h4>
-						<a v-bind:href="i.sourceURL" style="padding:0 5px 0 0;" v-bind:class="[i.type>0?'col-xs-4':'col-xs-12  col-sm-4']" href="#"><img v-bind:src="'.'+i.thumbnailPath[0]"/></a>
-						<a v-bind:href="i.sourceURL" style="padding:0 5px 0 0;"  class="col-xs-4"  v-if="i.type>0" href=""><img  v-bind:src="'.'+i.thumbnailPath[1]"/></a>
-						<a v-bind:href="i.sourceURL" style="padding: 0;"  class="col-xs-4" v-if="i.type>0" href=""><img  v-bind:src="'.'+i.thumbnailPath[2]"/></a>
-						<p >{{i.sourceName}}·{{i.date}}</p>
-					</li >
-					<li id="last" style="text-align: center;"><img style="width: 15px;" src="__STATIC__/home/image/loading.gif" alt="" /></li>
+		<!--<div id="app" >-->
+			<!--<div class="container" style="padding: 0;background-color: #f8f8f0;">-->
+				<!--<simple-grid :data-list="gridData" :columns="gridColumns">-->
+				<!--</simple-grid>-->
+			<!--</div>-->
+		<!--</div>-->
+		<div class="container" id="box">
+			<ul id="nav">
+				<!--<li style="clear: both;" data-class="one">-->
+					<!--<h4><a href="http://mp.weixin.qq.com/s/lHyVhkAIDwGwk1VgXAbE9w">仅次于王羲之的书法家！</a></h4>-->
+					<!--<a href="http://mp.weixin.qq.com/s/lHyVhkAIDwGwk1VgXAbE9w" style="padding:0 5px 0 0;" data-class="col-xs-12" href="#"><img src=""/></a>-->
+					<!--<a href="http://mp.weixin.qq.com/s/lHyVhkAIDwGwk1VgXAbE9w" style="padding:0 5px 0 0;"  data-class="col-xs-4"   href="#"><img  src="#"/></a>-->
+					<!--<a href="http://mp.weixin.qq.com/s/lHyVhkAIDwGwk1VgXAbE9w" style="padding: 0;"  data-class="col-xs-4"  href="#"><img  src="#"/></a>-->
+					<!--<p >古今书画·2017-04-08</p>-->
+				<!--</li >-->
+				<!--<li id="last" style="text-align: center;"><img style="width: 15px;" src="__STATIC__/home/image/loading.gif" alt="" /></li>-->
 			</ul>
-		</template>
+		</div>
+
+
+		<!--<template id="grid-template">-->
+			<!--<ul id="nav" >-->
+				<!--<li style="clear: both;" v-for="i in dataList" v-bind:class="[i.type>0?'three':'one']">-->
+						<!--<h4><a v-bind:href="i.sourceURL">{{i.title}}</a></h4>-->
+						<!--<a v-bind:href="i.sourceURL" style="padding:0 5px 0 0;" v-bind:class="[i.type>0?'col-xs-4':'col-xs-12  col-sm-4']" href="#"><img v-bind:src="'.'+i.thumbnailPath[0]"/></a>-->
+						<!--<a v-bind:href="i.sourceURL" style="padding:0 5px 0 0;"  class="col-xs-4"  v-if="i.type>0" href=""><img  v-bind:src="'.'+i.thumbnailPath[1]"/></a>-->
+						<!--<a v-bind:href="i.sourceURL" style="padding: 0;"  class="col-xs-4" v-if="i.type>0" href=""><img  v-bind:src="'.'+i.thumbnailPath[2]"/></a>-->
+						<!--<p >{{i.sourceName}}·{{i.date}}</p>-->
+					<!--</li >-->
+					<!--<li id="last" style="text-align: center;"><img style="width: 15px;" src="__STATIC__/home/image/loading.gif" alt="" /></li>-->
+			<!--</ul>-->
+		<!--</template>-->
 		<!--<script type="text/javascript">
             ajax({
                 url:"/index/rrs/api",
@@ -182,25 +221,62 @@
             }
 		</script>-->
 		<script type="text/javascript">
+            var page = 0;
+            var res = null;
+            var totalPage = 1;
+            var key = true;
+            var oUl = document.getElementById("nav");
+
+
+			//调用ajax函数获取数据
             ajax({
                 url:"/index/rrs/articleList",
                 type:"GET",
                 dataType:"json",
                 success:function (response,xml){
-                    alert(response);
+                    res = JSON.parse(response);
+                    totalPage = res.totalPage;
+                    console.log( res);
+                    getList(res);
                 },
                 fail :function(status){
-                    alert('fail');
+                    console.log('fail');
                 }
             });
 
+
+            window.onscroll = function(){
+                if( getScrollTop() + getWindowHeight() == getScrollHeight()){
+
+                    ajax({
+                        url:"/index/rrs/articleList",
+                        type:"GET",
+                        dataType:"json",
+                        success:function (response,xml){
+                            res = JSON.parse(response);
+                            console.log( res);
+                            getList(res);
+                        },
+                        fail :function(status){
+                            console.log('fail');
+                        }
+                    });
+//                    if(page+1 == totalPage){
+//                        console.log(11111);
+//                    }
+//                    key = false;
+                }
+
+            };
+
+            //ajax获取数据函数
             function ajax(options) {
                 options = options || {};
                 options.type = (options.type || "GET").toUpperCase();
                 options.datatype = options.datatype || "json";
                 var xhr = new XMLHttpRequest();
-                var page = 1;
-                var bt = true;
+
+
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState == 4){
                         var status = xhr.status;
@@ -210,11 +286,87 @@
                             options.fail && options.fail(status);
                         }
                     }
-                }
+                };
                 xhr.open("GET",options.url + "?page=" + page,true);
                 xhr.send(null);
+
+                page++;
+            }
+
+            //获取列表项
+            function getList(res){
+                if(page < res.totalPage){
+					for(var i = 0;i < res.jsonObj.length;i++){
+                        var thumbnailPath = res.jsonObj[i].thumbnails.split(";");
+						var str = '<li style="clear: both;" data-type="'+res.jsonObj[i].type+'"><h4><a href="'+res.jsonObj[i].url+'">'+res.jsonObj[i].title+'</a></h4><a href="'+res.jsonObj[i].url+'" style="padding:0 5px 0 0;"><img src="/thumbnails/'+thumbnailPath[0]+'"/></a><a href="'+res.jsonObj[i].url+'" style="padding:0 5px 0 0;" class="col-xs-4"><img  src="/thumbnails/'+thumbnailPath[1]+'"/></a><a href="'+res.jsonObj[i].url+'" style="padding: 0;" class="col-xs-4"><img  src="/thumbnails/'+thumbnailPath[2]+'"/></a><p >'+res.jsonObj[i].sourceName+'·'+res.jsonObj[i].date+'</p></li >';
+						oUl.innerHTML += str;
+					}
+					//判断类型 0为一张图，1为三张图
+					var aLi = document.getElementsByTagName("li");
+					for(var j = 0;j < aLi.length;j++){
+
+                        var aA = aLi[j].getElementsByTagName("a");
+					    if(aLi[j].getAttribute("data-type") == 0){
+					        aLi[j].className = "one";
+					        aA[1].className = "col-xs-12";
+					        aA[1].className = "col-sm-4";
+					        aA[2].style.display = "none";
+                            aA[3].style.display = "none";
+
+						}else if(aLi[j].getAttribute("data-type") == 1){
+                            aLi[j].className = "three";
+                            aA[1].className = "col-xs-4";
+						}
+					}
+                }
+			}
+
+
+
+            //滚动条在Y轴上的滚动距离
+
+            function getScrollTop(){
+                var scrollTop = 0, bodyScrollTop = 0, documentScrollTop = 0;
+                if(document.body){
+                    bodyScrollTop = document.body.scrollTop;
+                }
+                if(document.documentElement){
+                    documentScrollTop = document.documentElement.scrollTop;
+                }
+                scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop;
+                return scrollTop;
+            }
+
+
+            //文档的总高度
+
+            function getScrollHeight(){
+                var scrollHeight = 0, bodyScrollHeight = 0, documentScrollHeight = 0;
+                if(document.body){
+                    bodyScrollHeight = document.body.scrollHeight;
+                }
+                if(document.documentElement){
+                    documentScrollHeight = document.documentElement.scrollHeight;
+                }
+                scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight;
+                return scrollHeight;
+            }
+
+            //浏览器视口的高度
+
+            function getWindowHeight(){
+                var windowHeight = 0;
+                if(document.compatMode == "CSS1Compat"){
+                    windowHeight = document.documentElement.clientHeight;
+                }else{
+                    windowHeight = document.body.clientHeight;
+                }
+                return windowHeight;
             }
 		</script>
 	</body>
 
 </html>
+
+
+

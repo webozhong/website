@@ -28,5 +28,14 @@ class Index extends Controller
         $result = Article::GetArticleById($id);
         return $result;
     }
-    
+
+    public function SaveFeedback(){
+        $data = $_GET;
+        if(!isset($data['message']) && !isset($data['number'])){
+            return false;
+        };
+        $result = Article::SaveFeedback($data['message'],$data['number']);
+        return $result;
+    }
+
 }
