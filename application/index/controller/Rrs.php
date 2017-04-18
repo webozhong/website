@@ -6,7 +6,7 @@ use think\Controller;
 
 class Rrs extends Controller {
     public function Index(){
-        return $this->fetch('/rrss');
+        return $this->fetch('/rrs');
     }
     public function ArticleList(){
 

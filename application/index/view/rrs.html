@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cn">
 	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatinle" content="IE=Edge,chrome=1" />
+		<meta charset="UTF-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<meta http-equiv="X-UA-Compatinle" content="IE=Edge,chrome=1" />
 		<meta name="Keywords" content="播众，遇见书画，书画精选，书法，书画精选文章，书画">
 		<meta name="Description" content="遇见书画，遇见最好的你。为你挑选精致的书画作品文章。">
 		<title>遇见书画，遇见最好的你。</title>
@@ -14,215 +14,195 @@
 		<base target="_blank" />
 	</head>
 	<style>
-	.logo{width:100%; height:100%;margin-top: 8%}
-	.content{margin-left:5%;background-color:#F8F8F0;}
-	.title{background-color: #DBDAB7;}
-	.lite-title{font-family: 细黑; font-size: 2.2rem}
-	.lite-img{position:relative;width: 32%; height: 200px; overflow:hidden;}
-	.lite-img>img{position:absolute;top:-50%;left:-20%}
-	.big-title{font-family: 细黑; font-size: 2.2rem; color: #000000}
-	.big-img{width: 40%; height: 200px;}
-	.li{border-bottom: solid #DFDFDF 2px; padding-top: 2%;padding-bottom: 2%}
-	.source{font-size: 1.8rem;margin-top: 3%}
-	/*@media only screen and (min-width:759px ){*/
-		/*#nav>li>h4>a{color:#000000;text-decoration: none;font-family: "幼圆";font-weight: 700;font-size:1.2em;  }*/
-		/*#nav>.one>a{height:120px;overflow: hidden;  }*/
-		/*#nav>.one{padding: 0 0 40px;}*/
-		/*#nav>.one>h4{display: inline-block;width: 400px;margin:30px 0 0 10px;}*/
-		/*#nav>.one>p{margin: 30px  0 0 260px;}*/
-		/*#nav>.one>a>img,#nav>.three>a>img{width: 100%;}*/
-		/*.three>a{display:inline-block;height:120px;overflow:hidden;}*/
-	/*}*/
+		body{
+			background-color: #e1d2bc;
+		}
+		/*头部*/
+		#header{
+			height:60px;
+			padding:10px;
+			background-color: #dbdab7;
+		}
+		#header div{
+			height:100%;
+			padding:0;
+			margin-right:10px;
+		}
+		#header div a{
+			display:inline-block;
+			height:100%;
+		}
+		#logo{
+			height: 100%;
+		}
+		/*内容部分*/
+		#box{
+			background-color: #f8f8f0;
+		}
+		#nav>li>h4>a:hover{
+			color: #406599;
+		}
+		#nav{
+			padding:0 10px;
+		}
+		#nav>li{
+			border-bottom: 1px solid #dfdfdf;
+			margin: 20px 0 0 0;
+		}
+		li{
+			list-style-type: none;
+		}
+		@media only screen and (min-width:759px ){
+		.container{
+			width: 760px;
+		}
+		#nav>li>h4>a{
+			color:#000000;
+			text-decoration: none;
+			font-family: "幼圆";
+			font-weight: 700;
+			font-size:1.2em;
+		}
 
-	/*@media only screen and (max-width:759px){*/
-		/*.three>a{display:inline-block;height:60px;overflow: hidden;}*/
-		/*.three>a>img{width: 100%;}*/
-		/*.one>a{display:inline-block;height: auto;overflow: hidden;}*/
-		/*.one>a>img{width: 100%;}*/
-		/*#nav{padding: 0 5px;}*/
-		/*#nav>li>h4>a{color:#000000;text-decoration: none;font-family: "幼圆";font-weight: 400;}*/
-		/*#nav>li>p{color:rgb(119,119,119);padding:10px 0;margin: 0;}*/
-	/*}*/
+		#nav>.one>a{
+			display:inline-block;
+			height:120px ;
+			overflow: hidden;
+		}
+			#nav>.one{
+			padding: 0 0 40px;
+		}
+		#nav>.one>h4{
+			display: inline-block;
+			width: 400px;
+			margin: 30px  0 0 10px;
+		}
+			#nav>.one>p{
+			margin: 30px  0 0 260px;
+		}
+			#nav>.one>a>img,#nav>.three>a>img{
+			width: 100%;
+		}
+		.three>a{
+			display:inline-block;
+			height:120px;
+			overflow: hidden;
+		}
+		}
+		@media only screen and (max-width:759px ) {
+
+		.three>a{
+			display:inline-block;
+			height:80px;
+			overflow: hidden;
+		}
+		.three>a>img{
+			width: 100%;
+		}
+		.one>a{
+			display:inline-block;
+			height: 180px;
+			overflow: hidden;
+		}
+		.one>a>img{
+			width: 100%;
+
+		}
+		#nav{
+			padding: 0 5px;
+		}
+		#nav>li>h4>a{
+			color:#000000;
+			text-decoration: none;
+			font-family: "幼圆";
+			font-weight: 400;
+		}
+
+		#nav>li>p{
+			color: rgb(119,119,119);
+			padding:10px 0 ;
+			margin: 0;
+		}
+		}
 	</style>
-	<body style="background-color:#e1d2bc;">
-		<div class="col-xs-3"></div>
-		<div class="col-xs-5 content">
-			<div class="col-xs-12 title">
-				<div class="col-xs-2">
-					<a href="/">
-						<image class="logo" src="__STATIC__/home/image/logo.png"/>
-					</a>
-				</div>
-				<div class="col-xs-8"><h2>遇见书画</h2></div>
-			</div>
 
-			{foreach $result as $key=>$value}
-				{if $value.type == 1}
-				<div class="col-xs-12 li">
-					<h4 class="col-xs-12">
-						<a class="lite-title" href="{$value.url}">{$value.title}</a>
-					</h4>
-					<a href="{$value.url}">
-						<div class="col-xs-4 lite-img">
-							<img src="/thumbnails/{$value.thumbnails|mb_substr=0,19,'utf-8'}"/>
-						</div>
-						<div class="col-xs-4 lite-img" style="margin-left: 10px">
-							<img src="/thumbnails/{$value.thumbnails|mb_substr=20,19,'utf-8'}"/>
-						</div>
-						<div class="col-xs-4 lite-img" style="margin-left: 10px">
-							<img src="/thumbnails/{$value.thumbnails|mb_substr=40,19,'utf-8'}"/>
-						</div>
-					</a>
-					<p class="col-xs-12 source">{$value.sourceName}·{$value.date}</p>
-				</div>
-				{else}
-				<div class="col-xs-12 li">
-					<a href="{$value.url}">
-						<img class="col-xs-6 big-img" src="/thumbnails/{$value.thumbnails|mb_substr=0,19,'utf-8'}"/>
-						<div class="col-xs-6">
-							<h4 class="big-title"><a href="{$value.url}">{$value.title}</a></h4>
-							<p class="col-xs-12 source">{$value.sourceName}·{$value.date}</p>
-						</div>
+	<body >
+		<div id="header" class="container" >
+				<div class="col-xs-3 col-sm-2" >
+					<a href="http://www.webozhong.com" >
+					<image id="logo" src="__STATIC__/home/image/logo.png"></image>
 					</a>
 				</div>
-				{/if}
-			{/foreach}
-			<h2>下面的table用来显示数据库中的数据</h2>
-			<table align="center">
-
-			</table>
-			<button onclick="getData(this)">取数据</button>
+				<div class="col-xs-8">
+					<h1 style="margin: 0;">遇见书画</h1>
+				</div>
 		</div>
-
-		<!--<script type="text/javascript">-->
-            <!--$(document).ready(function() {-->
-
-                <!--$(window).scroll(function() {-->
-                    <!--//$(document).scrollTop() 获取垂直滚动的距离:最小值为0，最大值：文档高度-可视化窗口高度-->
-                    <!--//$(document).scrollLeft() 这是获取水平滚动条的距离-->
-                    <!--console.log("垂直滚动条位置："+$(document).scrollTop()+"&#45;&#45;"+$(window).height());-->
-
-                    <!--if ($(document).scrollTop() <= 0) {-->
-                        <!--console.log("滚动条已经到达顶部为0");-->
-                    <!--}-->
-
-                    <!--/**-->
-                     <!--*$(document).height():文档的高度-->
-                     <!--*$(window).height()：可视域的高度：窗口的大小：根据浏览窗口的大小变化-->
-                     <!--*判断底部:文档高度<=滚动条垂直高度+可视窗口的高度-->
-                     <!--* */-->
-                    <!--if ($(document).scrollTop() >= $(document).height() - $(window).height()) {-->
-                        <!--console.log("滚动条已经到达底部为" + $(document).scrollTop());-->
-                    <!--}-->
-                <!--});-->
-            <!--});-->
-		<!--</script>-->
-		<!--<div id="aindexndex	<div class="container" style="padding: 0;background-color: #f8f8f0;">
-				<simple-grid :data-list="gridData" :columns="gridColuIndex></simple-grid>
-			</div>
-		</div>
-		<template id="grid-template">
-			<ul id="naindexndex	<li style="clear: both;" v-for="i in dataList" Indexnd:class="[i.showType>0?'three':'one']">
-					<h4><a v-bind:href="i.sourceURL">{{i.title}}</a></h4>
-					<a v-bind:href="i.sourceURL" style="padding:0 5px 0 0;" v-bind:class="[i.showType>0?'col-xs-4':'col-xs-12  col-sm-4']" href="#"><img v-bind:src="'.'+i.thumbnailPath[0]"/></a>
-					<a v-bind:href="i.sourceURL" style="padding:0 5px 0 0;"  class="col-xs-4"  v-if="i.showType>0" href=""><img  v-bind:src="'.'+i.thumbnailPath[1]"/></a>
-					<a v-bind:href="i.sourceURL" style="padding: 0;"  class="col-xs-4" v-if="i.showType>0" href=""><img  v-bind:src="'.'+i.thumbnailPath[2]"/></a>
-					<p >{{i.sourceName}}·{{i.date}}</p>
-				</li >
-				<li id="last" style="text-align: center;"><img style="width: 15px;" src="__STATIC__/home/image/loading.gif" alt="" /></li>
+		<!--<div id="app" >-->
+			<!--<div class="container" style="padding: 0;background-color: #f8f8f0;">-->
+				<!--<simple-grid :data-list="gridData" :columns="gridColumns">-->
+				<!--</simple-grid>-->
+			<!--</div>-->
+		<!--</div>-->
+		<div class="container" id="box">
+			<ul id="nav">
+				<!--<li style="clear: both;" data-class="one">-->
+					<!--<h4><a href="http://mp.weixin.qq.com/s/lHyVhkAIDwGwk1VgXAbE9w">仅次于王羲之的书法家！</a></h4>-->
+					<!--<a href="http://mp.weixin.qq.com/s/lHyVhkAIDwGwk1VgXAbE9w" style="padding:0 5px 0 0;" data-class="col-xs-12" href="#"><img src=""/></a>-->
+					<!--<a href="http://mp.weixin.qq.com/s/lHyVhkAIDwGwk1VgXAbE9w" style="padding:0 5px 0 0;"  data-class="col-xs-4"   href="#"><img  src="#"/></a>-->
+					<!--<a href="http://mp.weixin.qq.com/s/lHyVhkAIDwGwk1VgXAbE9w" style="padding: 0;"  data-class="col-xs-4"  href="#"><img  src="#"/></a>-->
+					<!--<p >古今书画·2017-04-08</p>-->
+				<!--</li >-->
+				<!--<li id="last" style="text-align: center;"><img style="width: 15px;" src="__STATIC__/home/image/loading.gif" alt="" /></li>-->
 			</ul>
-		</template>
-		<script src="__STATIC__/home/js/vue.js"></script>
-		<script src="__STATIC__/home/js/vue-resource.js"></script>
-		<script>
-			Vue.component('simple-grid', {
-				template: '#grid-template',
-				props: ['dataList', 'columns']
-			})
-		</script>
-		<script>
-			var array=[]
-			var apage=0
-			var allpage=1
-			var bt=true
-			var demo = new Vue({
-				el: '#app',
-				data: {
-					gridData: [],
-					apiUrl: '/home/rrs'
-				},
-				ready: function() {
-					this.getCustomers()
-					var that=this
-					//滚动刷新
-					$(window).bind("scroll",function(){	 
-					if($(document).scrollTop()+$(window).height()>$('#app').height() -100 && bt) {
-						bt=false;
-						that.getCustomers()
-					}
-					})
-				},
-				methods: {
-					getCustomers: function() {//从后台获取数据
-						if(apage<allpage){
-							this.$http.get(this.apiUrl+"?page="+apage)
-								.then((response) => {
-									apage++;
-									response.data=JSON.parse(response.data);
-									for(i in response.data.jsonObj){
-									response.data.jsonObj[i].thumbnailPath=response.data.jsonObj[i].thumbnailPath.split(";");
-									}
-									allpage=response.data.totalPage;
-									array=array.concat(response.data.jsonObj)
-									this.$set('gridData',array)
-									bt=true
-									//alert(typeof response.data)
-								})
-							}
-							else{
-								$('#last').html("没有更多内容了！")
-							}
-					}
-				}
-			})
-		</script>-->
-		<script type="text/javascript">
-			ajax({
-				url:"/index/rrs/api",
-				type:"GET",
-				data:{page:1},
-				dataType:"json",
-				success:function (response,xml){
-				    alert(response);
+		</div>
+
+
+		<!--<template id="grid-template">-->
+			<!--<ul id="nav" >-->
+				<!--<li style="clear: both;" v-for="i in dataList" v-bind:class="[i.type>0?'three':'one']">-->
+						<!--<h4><a v-bind:href="i.sourceURL">{{i.title}}</a></h4>-->
+						<!--<a v-bind:href="i.sourceURL" style="padding:0 5px 0 0;" v-bind:class="[i.type>0?'col-xs-4':'col-xs-12  col-sm-4']" href="#"><img v-bind:src="'.'+i.thumbnailPath[0]"/></a>-->
+						<!--<a v-bind:href="i.sourceURL" style="padding:0 5px 0 0;"  class="col-xs-4"  v-if="i.type>0" href=""><img  v-bind:src="'.'+i.thumbnailPath[1]"/></a>-->
+						<!--<a v-bind:href="i.sourceURL" style="padding: 0;"  class="col-xs-4" v-if="i.type>0" href=""><img  v-bind:src="'.'+i.thumbnailPath[2]"/></a>-->
+						<!--<p >{{i.sourceName}}·{{i.date}}</p>-->
+					<!--</li >-->
+					<!--<li id="last" style="text-align: center;"><img style="width: 15px;" src="__STATIC__/home/image/loading.gif" alt="" /></li>-->
+			<!--</ul>-->
+		<!--</template>-->
+		<!--<script type="text/javascript">
+            ajax({
+                url:"/index/rrs/api",
+                type:"GET",
+                dataType:"json",
+                success:function (response,xml){
+                    alert(response);
                 },
-				fail :function(status){
+                fail :function(status){
                     alert('fail');
                 }
-			});
-			
-			function ajax(options) {
-			    options = options || {};
-			    options.type = (options.type || "GET").toUpperCase();
-			    options.datatype = options.datatype || "json";
-			    var params = formatParams(options.data);
+            });
 
-			    var xhr = new XMLHttpRequest();
-
-			    xhr.onreadystatechange = function () {
-			        if (xhr.readyState == 4){
-			            var status = xhr.status;
-			            if(status >= 200 && status < 300){
-			                options.success && options.success(xhr.responseText,xhr.responseXML);
-						} else{
-			                options.fail && options.fail(status);
-						}
-					}
+            function ajax(options) {
+                options = options || {};
+                options.type = (options.type || "GET").toUpperCase();
+                options.datatype = options.datatype || "json";
+                var xhr = new XMLHttpRequest();
+				var page = 1;
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4){
+                        var status = xhr.status;
+                        if(status >= 200 && status < 300){
+                            options.success && options.success(xhr.responseText,xhr.responseXML);
+                        } else{
+                            options.fail && options.fail(status);
+                        }
+                    }
                 }
 
                 if(options.type == "GET"){
-			        xhr.open("GET",options.url + "?" + params,true);
-			        xhr.send(null);
-				}else if (options.type == "POST") {
+                    xhr.open("GET",options.url + "?page=" + page,true);
+                    xhr.send(null);
+                }else if (options.type == "POST") {
                     xhr.open("POST", options.url, true);
                     //设置表单提交时的内容类型
                     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -238,8 +218,155 @@
                     arr.push(("v=" + Math.random()).replace(".",""));
                     return arr.join("&");
                 }
+            }
+		</script>-->
+		<script type="text/javascript">
+            var page = 0;
+            var res = null;
+            var totalPage = 1;
+            var key = true;
+            var oUl = document.getElementById("nav");
 
+
+			//调用ajax函数获取数据
+            ajax({
+                url:"/index/rrs/articleList",
+                type:"GET",
+                dataType:"json",
+                success:function (response,xml){
+                    res = JSON.parse(response);
+                    totalPage = res.totalPage;
+                    console.log( res);
+                    getList(res);
+                },
+                fail :function(status){
+                    console.log('fail');
+                }
+            });
+
+
+            window.onscroll = function(){
+                if( getScrollTop() + getWindowHeight() == getScrollHeight()){
+
+                    ajax({
+                        url:"/index/rrs/articleList",
+                        type:"GET",
+                        dataType:"json",
+                        success:function (response,xml){
+                            res = JSON.parse(response);
+                            console.log( res);
+                            getList(res);
+                        },
+                        fail :function(status){
+                            console.log('fail');
+                        }
+                    });
+//                    if(page+1 == totalPage){
+//                        console.log(11111);
+//                    }
+//                    key = false;
+                }
+
+            };
+
+            //ajax获取数据函数
+            function ajax(options) {
+                options = options || {};
+                options.type = (options.type || "GET").toUpperCase();
+                options.datatype = options.datatype || "json";
+                var xhr = new XMLHttpRequest();
+
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4){
+                        var status = xhr.status;
+                        if(status >= 200 && status < 300){
+							options.success && options.success(xhr.responseText,xhr.responseXML);
+                        } else{
+                            options.fail && options.fail(status);
+                        }
+                    }
+                };
+                xhr.open("GET",options.url + "?page=" + page,true);
+                xhr.send(null);
+
+                page++;
+            }
+
+            //获取列表项
+            function getList(res){
+                if(page < res.totalPage){
+					for(var i = 0;i < res.jsonObj.length;i++){
+                        var thumbnailPath = res.jsonObj[i].thumbnails.split(";");
+						var str = '<li style="clear: both;" data-type="'+res.jsonObj[i].type+'"><h4><a href="'+res.jsonObj[i].url+'">'+res.jsonObj[i].title+'</a></h4><a href="'+res.jsonObj[i].url+'" style="padding:0 5px 0 0;"><img src="/thumbnails/'+thumbnailPath[0]+'"/></a><a href="'+res.jsonObj[i].url+'" style="padding:0 5px 0 0;" class="col-xs-4"><img  src="/thumbnails/'+thumbnailPath[1]+'"/></a><a href="'+res.jsonObj[i].url+'" style="padding: 0;" class="col-xs-4"><img  src="/thumbnails/'+thumbnailPath[2]+'"/></a><p >'+res.jsonObj[i].sourceName+'·'+res.jsonObj[i].date+'</p></li >';
+						oUl.innerHTML += str;
+					}
+					//判断类型 0为一张图，1为三张图
+					var aLi = document.getElementsByTagName("li");
+					for(var j = 0;j < aLi.length;j++){
+
+                        var aA = aLi[j].getElementsByTagName("a");
+					    if(aLi[j].getAttribute("data-type") == 0){
+					        aLi[j].className = "one";
+					        aA[1].className = "col-xs-12";
+					        aA[1].className = "col-sm-4";
+					        aA[2].style.display = "none";
+                            aA[3].style.display = "none";
+
+						}else if(aLi[j].getAttribute("data-type") == 1){
+                            aLi[j].className = "three";
+                            aA[1].className = "col-xs-4";
+						}
+					}
+                }
+			}
+
+
+
+            //滚动条在Y轴上的滚动距离
+
+            function getScrollTop(){
+                var scrollTop = 0, bodyScrollTop = 0, documentScrollTop = 0;
+                if(document.body){
+                    bodyScrollTop = document.body.scrollTop;
+                }
+                if(document.documentElement){
+                    documentScrollTop = document.documentElement.scrollTop;
+                }
+                scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop;
+                return scrollTop;
+            }
+
+
+            //文档的总高度
+
+            function getScrollHeight(){
+                var scrollHeight = 0, bodyScrollHeight = 0, documentScrollHeight = 0;
+                if(document.body){
+                    bodyScrollHeight = document.body.scrollHeight;
+                }
+                if(document.documentElement){
+                    documentScrollHeight = document.documentElement.scrollHeight;
+                }
+                scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight;
+                return scrollHeight;
+            }
+
+            //浏览器视口的高度
+
+            function getWindowHeight(){
+                var windowHeight = 0;
+                if(document.compatMode == "CSS1Compat"){
+                    windowHeight = document.documentElement.clientHeight;
+                }else{
+                    windowHeight = document.body.clientHeight;
+                }
+                return windowHeight;
             }
 		</script>
 	</body>
+
 </html>
+
+
+
