@@ -131,16 +131,22 @@
                             <td class="col-md-1">{$value.id}</td>
                             <td class="col-md-4">{$value.title}</td>
                             <td class="col-md-1">{$value.date}</td>
-                            <td class="col-md-2">{$value.sourceName}</td>
+                            <td class="col-md-1">{$value.sourceName}</td>
                             <td class="col-md-1">{$value.sourceNum}</td>
                             <td class="col-md-1">{$value.type == 1 ? '小图':'大图'}</td>
-                            <td class="col-md-2">
+                            <td class="col-md-3">
                                 <button class="btn btn-info" data-toggle="modal" data-target="#viewDetail_{$value.id}">
                                     <span class="glyphicon glyphicon-zoom-in"></span>
                                 </button>
+                                <a href="/admin/articles/editArticle?id={$value.id}">
+                                    <button class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
+                                </a>
                                 <button class="btn btn-danger" data-toggle="modal" data-target="#del_{$value.id}">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </button>
+
                             </td>
                         </tr>
                         {/foreach}

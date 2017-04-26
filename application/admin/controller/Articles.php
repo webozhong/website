@@ -1,12 +1,13 @@
 <?php
 namespace app\admin\controller;
 use app\admin\model\Article;
+use function foo\func;
 use think\Loader;
 
 class Articles extends Base
 {
     /**
-     * 文章详情展示
+     * 文章信息列表
      * @return mixed
      */
     public function index()
@@ -25,7 +26,8 @@ class Articles extends Base
     }
 
     /**
-     * 添加文章
+     * 新增文章
+     * @return bool
      */
     public function addArticle()
     {
@@ -100,8 +102,7 @@ class Articles extends Base
         }
 
         //压缩图片
-        function img2thumb($src_img, $dst_img, $width = 75, $height = 75, $cut = 0, $proportion = 0)
-        {
+        function img2thumb($src_img, $dst_img, $width = 75, $height = 75, $cut = 0, $proportion = 0){
             if(!is_file($src_img))
             {
                 return false;
@@ -212,11 +213,9 @@ class Articles extends Base
             return true;
         }
 
-        function fileext($file)
-        {
+        function fileext($file){
             return pathinfo($file, PATHINFO_EXTENSION);
         }
-
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -351,7 +350,7 @@ class Articles extends Base
 
     /**
      * 删除文章
-     * @return bool 返回执行结果
+     * @return bool
      */
     public function delArticle(){
         $id  = isset($_GET['id']) ? $_GET['id'] : null;
@@ -379,6 +378,42 @@ class Articles extends Base
             return $this->success('删除成功','/admin/articles');
         }else{
             return $this->error('删除失败','/admin/articles');
+        }
+    }
+
+    /**
+     * 跳转到编辑文章页面，传递文章id
+     */
+    public function editArticle(){
+        $id = $_GET['id'];
+        $result = Article::GetThumbnailsPath($id);
+        $this->assign('result',$result);
+        $this->assign('id',$id);
+        return $this->fetch('/article-edit');
+    }
+
+    /**
+     * 上传缩略图调用方法
+     */
+    public function uploadThumbnails(){
+        //获取需要修改的缩略图的名称
+        $id = $_GET['id'];
+        $result = Article::GetThumbnailsPath($id);
+        //转化查询结果
+        $thumbStr = $result[0]['thumbnails'];
+        $thumbArr = explode(';', $thumbStr);
+        //获得上传的缩略图
+        $file1 = request()->file('thumbnails1');
+        $file2 = request()->file('thumbnails2');
+        $file3 = request()->file('thumbnails3');
+        $info = null;
+        if($file1)$info = $file1->move(ROOT_PATH.'public'.DS.'thumbnails',$thumbArr[0]);
+        if($file2)$info = $file2->move(ROOT_PATH.'public'.DS.'thumbnails',$thumbArr[1]);
+        if($file3)$info = $file3->move(ROOT_PATH.'public'.DS.'thumbnails',$thumbArr[2]);
+        if($info!=null){
+            return $this->success('缩略图上传成功','/admin/articles');
+        }else{
+            return $this->error('上传失败，您未选中任何文件','/admin/articles');
         }
     }
 }

@@ -20,7 +20,7 @@ class Article extends Model {
 
 
     /**
-     * 获取所有文章数量
+     * 获取文章总数
      * @return int|string
      */
     public static function GetTotal()
@@ -84,5 +84,16 @@ class Article extends Model {
             ->delete();
         return $bool;
 
+    }
+    /**
+     *获取文章缩略图地址byId
+     * @param [int] $id [description]
+     */
+    public static function GetThumbnailsPath($id){
+        $result = Db::table('articles')
+            ->field('thumbnails')
+            ->where('id',$id)
+            ->select();
+        return $result;
     }
 }

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>文章编辑</title>
+    <!-- Bootstrap -->
+    <link href="__STATIC__/admin/css/bootstrap.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        body{text-align: center}
+    </style>
+</head>
+<body>
+    <h3>缩略图上传</h3>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form action="/admin/articles/uploadThumbnails?id={$id}" enctype="multipart/form-data" method="post">
+            <input class="btn btn-default" type="file" name="thumbnails1"/>
+            <input class="btn btn-default" type="file" name="thumbnails2"/>
+            <input class="btn btn-default" type="file" name="thumbnails3"/>
+            <input class="btn btn-success" type="submit" value="上传">
+        </form>
+    </div>
+    <div class="col-md-4"></div>
+
+    
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="__STATIC__/admin/js/jquery-3.1.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="__STATIC__/admin/js/bootstrap.min.js"></script>
+</body>
+</html>

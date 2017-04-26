@@ -13,6 +13,7 @@ class Index extends Controller
         $totalPage = ceil($total/10);//总页数
         $arr['total'] = $total;
         $arr['totalPage'] = $totalPage;
+        $arr['page'] = $page;
         $result = Article::GetArticles($page,10);
         $js=array('jsonObj'=>$result);
         $c=array_merge($js,$arr);
