@@ -6,6 +6,9 @@ use think\Controller;
 
 class Index extends Controller
 {
+    /**首页内容接口
+     * @return array
+     */
     public function Index()
     {
         $page=$_GET['page'];
@@ -19,17 +22,20 @@ class Index extends Controller
         $c=array_merge($js,$arr);
         return $c;
     }
-    public function GetBanner(){
-        $result = Article::GetArticles(0,3);
-        return $result;
-    }
 
+    /**
+     * 文章内容接口
+     * @return \PDOStatement
+     */
     public function GetArticleInfo(){
         $id = $_GET['id'];
         $result = Article::GetArticleById($id);
         return $result;
     }
 
+    /**
+     * 用户反馈保存接口
+     */
     public function SaveFeedback(){
         $data = $_GET;
         if(!isset($data['message']) && !isset($data['number'])){
@@ -38,5 +44,4 @@ class Index extends Controller
         $result = Article::SaveFeedback($data['message'],$data['number']);
         return $result;
     }
-
 }
