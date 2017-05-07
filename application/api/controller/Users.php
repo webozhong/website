@@ -6,18 +6,33 @@ use think\Controller;
 
 class Users extends Controller {
 
+
+    /**
+     * 小程序用户登录 openid session_key
+     */
+    public function Login(){
+        //用户code
+        $code = $_GET['code'];
+        //小程序ID
+        $appId = 'wx71342e901702563e';
+        //小程序secret
+        $secret = 'df90142f1e892876bafeef2aeccba876';
+        //openid请求接口地址
+        $url = "https://api.weixin.qq.com/sns/jscode2session?appid=$appId&secret=$secret&js_code=$code&grant_type=authorization_code";
+        $openid = file_get_contents($url);
+        return $openid;
+
+    }
+    public function Info(){
+        phpinfo();
+    }
     /**
      * 保存用户信息接口
      * @return int|string
      */
-    public function SaveUserInfo(){
-        $openId = $_POST['openid'];
-        $userName = $_POST['username'];
-        $city = $_POST['city'];
-        $sex = $_POST['sex'];
-
+    private function SaveUserInfo($openId){
         if(!User::isExist($openId)){
-            $result = User::addUser($openId,$userName,$city,$sex);
+            $result = User::addUser($openId);
             return $result;
         }
     }

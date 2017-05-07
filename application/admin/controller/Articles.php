@@ -1,7 +1,6 @@
 <?php
 namespace app\admin\controller;
 use app\admin\model\Article;
-use function foo\func;
 use think\Loader;
 
 class Articles extends Base
