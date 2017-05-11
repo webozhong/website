@@ -9,7 +9,11 @@ class Users extends Controller {
 
 
     /**
+<<<<<<< HEAD
      * 小程序用户登录 换取openid session_key
+=======
+     * 小程序用户登录 openid session_key
+>>>>>>> origin/master
      */
     public function Login(){
         //用户code
@@ -22,12 +26,21 @@ class Users extends Controller {
         $url = "https://api.weixin.qq.com/sns/jscode2session?appid=$appId&secret=$secret&js_code=$code&grant_type=authorization_code";
         $openid = file_get_contents($url);
         return $openid;
+<<<<<<< HEAD
     }
 
+=======
+
+    }
+    public function Info(){
+        phpinfo();
+    }
+>>>>>>> origin/master
     /**
      * 保存用户信息接口
      * @return int|string
      */
+<<<<<<< HEAD
     public function SaveUserInfo(){
         $openid = $_POST['openid'];
         $avatarUrl = $_POST['avatarUrl'];
@@ -43,6 +56,11 @@ class Users extends Controller {
         }else{
             $dateTime = date('Y-m-d H:i:s');
             $result = User::updateUser($openid,$avatarUrl,$city,$country,$province,$nickName,$gender,$dateTime);
+=======
+    private function SaveUserInfo($openId){
+        if(!User::isExist($openId)){
+            $result = User::addUser($openId);
+>>>>>>> origin/master
             return $result;
         }
     }
