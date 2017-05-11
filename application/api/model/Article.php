@@ -21,10 +21,6 @@ class Article extends Model
      * @return false|\PDOStatement|string|\think\Collection
      */
     public static function GetArticles($page,$num){
-        $data = [
-            'id'=>'id',
-        ];
-
         $result = Db::table('articles')
             ->field('id,title,date,sourceName,sourceNum,url,thumbnails,type')
             ->order('id','desc')
