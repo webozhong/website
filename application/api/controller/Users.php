@@ -1,46 +1,63 @@
 <?php
 namespace app\api\controller;
-
 use app\api\model\User;
 use think\Controller;
-use think\Session;
-
 class Users extends Controller {
 
-
-    /**
-<<<<<<< HEAD
-     * 小程序用户登录 换取openid session_key
-=======
-     * 小程序用户登录 openid session_key
->>>>>>> origin/master
-     */
-    public function Login(){
-        //用户code
-        $code = $_GET['code'];
-        //小程序ID
-        $appId = 'wx71342e901702563e';
-        //小程序secret
-        $secret = 'df90142f1e892876bafeef2aeccba876';
-        //openid请求接口地址
-        $url = "https://api.weixin.qq.com/sns/jscode2session?appid=$appId&secret=$secret&js_code=$code&grant_type=authorization_code";
-        $openid = file_get_contents($url);
-        return $openid;
-<<<<<<< HEAD
-    }
-
-=======
-
-    }
     public function Info(){
         phpinfo();
     }
->>>>>>> origin/master
+    /**
+     * 小程序登录、解密、返回用户私密信息
+     */
+    public function Login(){
+
+        //小程序APPID和AppSecret
+        $APPID = 'wx71342e901702563e';
+        $AppSecret = 'df90142f1e892876bafeef2aeccba876';
+
+        //接收POST数据
+        $code = $_POST['code'];//换取openId和session_key的code
+        $rawData = $_POST['rawData'];
+        $signature =$_POST['signature'];
+        $encryptedData = $_POST['encryptedData'];
+        $iv = $_POST['iv'];
+        $url="https://api.weixin.qq.com/sns/jscode2session?appid=".$APPID."&secret=".$AppSecret."&js_code=".$code."&grant_type=authorization_code";
+        $arr = file_get_contents($url);
+        $arr = json_decode($arr,true);
+        $openid = $arr['openid'];
+        $session_key = $arr['session_key'];
+
+        // 数据签名校验
+        $signature2 = sha1($rawData.$session_key);  //记住不应该用TP中的I方法，会过滤掉必要的数据
+        if ($signature != $signature2) {
+            return '数据签名验证失败！';
+            die;
+        }
+        //开发者如需要获取敏感数据，需要对接口返回的加密数据( encryptedData )进行对称解密
+        Vendor("wechat.wxBizDataCrypt");  //加载解密文件在vendor文件夹下
+        $pc = new \WXBizDataCrypt($APPID, $session_key);
+        $errCode = $pc->decryptData($encryptedData, $iv, $data);  //其中$data包含用户的所有数据
+        if ($errCode == 0) {
+            return $data;
+        } else {
+            print($errCode . "\n");
+        }
+
+        //生成第三方3rd_session
+//        $session3rd  = null;
+//        $strPol = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+//        $max = strlen($strPol)-1;
+//        for($i=0;$i<16;$i++){
+//            $session3rd .=$strPol[rand(0,$max)];
+//        }
+//        echo $session3rd;
+    }
+
     /**
      * 保存用户信息接口
      * @return int|string
      */
-<<<<<<< HEAD
     public function SaveUserInfo(){
         $openid = $_POST['openid'];
         $avatarUrl = $_POST['avatarUrl'];
@@ -52,19 +69,12 @@ class Users extends Controller {
 
         if(!User::isExist($openid)) {
             $result = User::addUser($openid,$avatarUrl,$city,$country,$province,$nickName,$gender);
-            return $result;
         }else{
             $dateTime = date('Y-m-d H:i:s');
-            $result = User::updateUser($openid,$avatarUrl,$city,$country,$province,$nickName,$gender,$dateTime);
-=======
-    private function SaveUserInfo($openId){
-        if(!User::isExist($openId)){
-            $result = User::addUser($openId);
->>>>>>> origin/master
-            return $result;
+            $result = User::updateUser($openid, $avatarUrl, $city, $country, $province, $nickName, $gender, $dateTime);
         }
+        return $result;
     }
-
     /**
      *
      * 获取单个用户收藏列表接口

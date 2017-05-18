@@ -80,22 +80,26 @@ class User extends Model{
             ->field('id,articleid')
             ->order('id','desc')
             ->select();
-        //构建sql语句
-        $sql = "select id,title,thumbnails from articles where id in(";
-        foreach ($artList as $item){
-            $value = $item['articleid'];
-            $sql .="$value,";
+        if($artList){
+            //构建sql语句
+            $sql = "select id,title,thumbnails from articles where id in(";
+            foreach ($artList as $item){
+                $value = $item['articleid'];
+                $sql .="$value,";
+            }
+            $sql = substr($sql,0,-1);
+            $sql .=")order by field(id,";
+            foreach($artList as $item){
+                $value = $item['articleid'];
+                $sql .="$value,";
+            }
+            $sql = substr($sql,0,-1);
+            $sql.=")";
+            $result = Db::query($sql);
+            return $result;
         }
-        $sql = substr($sql,0,-1);
-        $sql .=")order by field(id,";
-        foreach($artList as $item){
-            $value = $item['articleid'];
-            $sql .="$value,";
-        }
-        $sql = substr($sql,0,-1);
-        $sql.=")";
-        $result = Db::query($sql);
-        return $result;
+        return $artList;
+
     }
 
     /**
