@@ -37,7 +37,7 @@ class Index extends Controller
      * 用户反馈保存接口
      */
     public function SaveFeedback(){
-        $data = $_GET;
+        $data = $_POST;
         if(!isset($data['message']) && !isset($data['number'])){
             return false;
         };
