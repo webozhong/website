@@ -55,4 +55,12 @@ class Article extends Model
             ->insert($data);
         return $result;
     }
+
+    public static function Test($id){
+        $result = Db::table('articles')
+            ->where('id',$id)
+            ->select();
+        return $result;
+    }
+
 }
