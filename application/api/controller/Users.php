@@ -4,9 +4,6 @@ use app\api\model\User;
 use think\Controller;
 class Users extends Controller {
 
-    public function Info(){
-        phpinfo();
-    }
     /**
      * 小程序登录、解密、返回用户私密信息
      */

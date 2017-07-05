@@ -11,6 +11,7 @@ class Articles extends Base
      * 文章信息列表
      * @return mixed
      */
+
     public function index()
     {
 
@@ -39,30 +40,6 @@ class Articles extends Base
             return $str;
         }
 
-        //下载缩略图
-        function DownLoadthumbnail(){
-//            $ch = curl_init();
-//            curl_setopt($ch, CURLOPT_URL, $url);
-//            curl_setopt($ch, CURLOPT_HEADER, 0);
-//            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-//            $content = curl_exec($ch);
-            $cp = getcwd();
-//            if(!is_dir($cp.'\thumbnails'))
-//            {
-//                mkdir($cp.'\thumbnails');
-//            }
-            $content = '0';
-            //获取当前时间戳防止文件重名
-            date_default_timezone_set('PRC');
-            $name = date('YmdHis');
-            //$fp = "$cp\\thumbnails\\$name.jpg";
-            //$img = fopen($fp,"a");
-            //fwrite($img, $content);
-            //fclose($img);
-            //完成将文件名返回
-            return "$name.jpg";
-        }
-
         //下载原图
         function DownLoadOriginal($url){
             $ch = curl_init();
@@ -86,9 +63,6 @@ class Articles extends Base
             curl_close($ch);
             return "$name.jpg";
         }
-
-        //引入simple_html_dom操作类库
-        Loader::import('simplehtmldom.simple_html_dom');
         $url = $_POST['url'];
         $type = $_POST['type'];
         $ch = curl_init();
@@ -121,9 +95,10 @@ class Articles extends Base
         $remove = substr($content,$a-1,$b-5);
         $content = str_replace($remove,"</html>",$content);
 
+        //引入simple_html_dom操作类库
+        Loader::import('simplehtmldom.simple_html_dom');
         //实例化simple_html_dom类库
         $dom = str_get_html($content);
-        //$dom = new simple_html_dom($content);
 
         $title = filter($dom->find('h2',0));
         $date = filter($dom->find('[id=post-date]',0));
@@ -131,102 +106,16 @@ class Articles extends Base
         $sourceNum = filter($dom->find('[class=profile_meta_value]',0));
 
         //保存文章前3张图片作为预览页面的缩略图
-        $i =-1;
         $pathArr=array();
-        foreach($dom->find('img[data-type]') as $element){
-            $i++;
-            if($i<=2){
-                //$src = $element->src;
-                sleep(1);
-                $pathArr[$i]=DownLoadthumbnail();
-
-            }
-            else{
-                break;
-            }
+        for ($i=0;$i<=2;$i++){
+            sleep(1);
+            //获取当前时间戳防止文件重名
+            date_default_timezone_set('PRC');
+            $pathArr[$i]=date('YmdHis').".jpg";
         }
-
         $thumbnails = implode(';',$pathArr);//数组拼接成字符串
-
-//        //抓取到文章中所有的p标签，文字和图片都保存在其中
-//        $introduce = $dom->find('p');
-//        //定义2个数组
-//        $textArr = array(
-//            'p'=>array(),
-//            'img'=>array(),
-//            'width'=>array(),
-//            'height'=>array()
-//        );
-//
-//        $imgArr = array();
-//        $widthArr = array();
-//        $heightArr = array();
-//
-//        //保存图片并将图片名称保存入$imgArr
-//        $contentImg = $dom->find('img');
-//        $contentImg=array_splice($contentImg,1);
-//
-//        foreach($contentImg as $element){
-//            $src = $element->src;
-//            //调用DownLoadImages函数，该函数将图片抓取到本地保存并返回被保存的文件名
-//            //将本地图片文件名追加入$imgArr数组中
-//            $name = DownLoadOriginal($src);
-//            sleep(1);
-//            if(file_exists("./originals/$name")){
-//                $imgInfo = getimagesize("./originals/$name");
-//                $width = $imgInfo[0];
-//                $height = $imgInfo[1];
-//                array_push($imgArr,$name);
-//                array_push($widthArr,$width);
-//                array_push($heightArr,$height);
-//            }else{
-//                echo "获取不到图片信息，请检查文件public/originals/$name";
-//            }
-//
-//        }
-//
-//        array_push($imgArr,"empty.jpg");
-//        //遍历$introduce装入二维数组$textArr
-//        foreach ($introduce as $value){
-//            if(!preg_match("/<br/",$value) && !filter($value)==null || preg_match("/<img/",$value)){
-//                $val = filter($value);
-////                if($val==null){
-////                    echo '图片占用位置';
-////                    echo "<br/>";
-////                }
-////                echo $val;
-////                echo "<br/>";
-//                if ($val==null || $val=="" || $val==0 || $val ==false){
-//                    array_push($textArr['p'],$val);
-//                    array_push($textArr['img'],"img.jpg");
-//                    array_push($textArr['width'],"");
-//                    array_push($textArr['height'],"");
-//                }else {
-//                    array_push($textArr['img'],"empty.jpg");
-//                    array_push($textArr['p'], $val);
-//                    array_push($textArr['width'],"");
-//                    array_push($textArr['height'],"");
-//                }
-//            }
-//        }
-//
-//        $i=0;
-//        foreach ($textArr['img'] as $key=>$value){
-//            if($value == "img.jpg"){
-//                if($i == count($imgArr)){
-//                    break;
-//            }
-//                $textArr['img'][$key] = $imgArr[$i];
-//                $textArr['width'][$key] = isset($widthArr[$i])? $widthArr[$i]:0;
-//                $textArr['height'][$key] = isset($heightArr[$i])? $heightArr[$i]:0;
-//                $i++;
-//            }
-//        }
-//        var_dump($textArr);
-//
-//        //内容转为json格式以存入数据库
+        //内容留空待编辑
         $data = '';
-        echo $data;
         $bool = Article::addArticle($title,$date,$sourceName,$sourceNum,$url,$thumbnails,$type,$data);
         $dom->clear();
         curl_close($ch);
@@ -331,7 +220,7 @@ class Articles extends Base
                 $newUrl = substr_replace($newUrl,'',4,-$newUrlLength+5);
                 echo $newUrl;
             }
-            if($newUrl=='http://m.qpic.cn/psb'){
+            if($newUrl=='http://m.qpic.cn/psb'||$newUrl=='http://m.qpic.cn/psu'){
                 $newUrl = $url;
             }
             $ch = curl_init();

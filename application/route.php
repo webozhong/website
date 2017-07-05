@@ -8,7 +8,7 @@
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
-
+use think\Route;
 return [
     '__pattern__' => [
         'name' => '\w+',
@@ -17,5 +17,6 @@ return [
         ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
         ':name' => ['index/hello', ['method' => 'post']],
     ],
+    //Route::resource('blog','index/blog')
 
 ];
