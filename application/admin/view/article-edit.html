@@ -2,77 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>小程序文章内容编辑</title>
+    <title>文章编辑</title>
     <!-- Bootstrap -->
     <link href="__STATIC__/admin/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="__STATIC__/layui/css/layui.css">
-
-    <script src="__STATIC__/layui/layui.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
-        .thumbs{
-            height:120px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-        .thumb{
-            height:60px;
-        }
-        .sub{
-            margin-top: 10px;
-        }
+        body{text-align: center}
     </style>
 </head>
 <body>
-    <div class="col-md-6">
-        这里用来做文章展示预览
+    <h3>缩略图上传</h3>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form action="/admin/articles/uploadThumbnails?id={$id}" enctype="multipart/form-data" method="post">
+            <input class="btn btn-default" type="file" name="thumbnails1"/>
+            <input class="btn btn-default" type="file" name="thumbnails2"/>
+            <input class="btn btn-default" type="file" name="thumbnails3"/>
+            <input class="btn btn-success" type="submit" value="上传">
+        </form>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4"></div>
 
-        <div class="thumbs">
-            <form action="/admin/articles/uploadThumbnails?id={$id}" enctype="multipart/form-data" method="post">
-                <input class="btn btn-default col-md-4 thumb" type="file" name="thumbnails1"/>
-                <input class="btn btn-default col-md-4 thumb" type="file" name="thumbnails2"/>
-                <input class="btn btn-default col-md-4 thumb" type="file" name="thumbnails3"/>
-                <input class="btn btn-success col-md-12 sub" type="submit" value="更新缩略图">
-            </form>
-        </div>
-        <div>
-            <form action="/admin/articles/uploadArticle?id={$id}" enctype="multipart/form-data" method="post">
-                <textarea class="layui-textarea" id="content" name="content" style="display: none"></textarea>
-                <div class="site-demo-button" style="margin-top: 20px;">
-                    <button class="layui-btn site-demo-layedit" data-type="content" type="submit">上传文章</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <script>
-        layui.use('layedit', function(){
-            var layedit = layui.layedit
-                ,$ = layui.jquery;
-            //构建编辑器
-            layedit.set({
-                uploadImage:{
-                    url:'/admin/articles/lay_img_upload',
-                    type:'post',
-                }
-            });
-            var index = layedit.build('content',{
-                //设置宽高
-                height:700
-            });
-
-
-        });
-    </script>
-<script>
-
-</script>
+    
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="__STATIC__/admin/js/jquery-3.1.1.min.js"></script>
