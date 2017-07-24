@@ -117,20 +117,20 @@
                     <thead>
                         <tr>
                             <td class="col-md-1">ID</td>
-                            <td class="col-md-4">文章标题</td>
-                            <td class="col-md-1">发布日期</td>
+                            <td class="col-md-3">文章标题</td>
+                            <td class="col-md-3">原文链接</td>
                             <td class="col-md-1">来源公众号</td>
-                            <td class="col-md-2">来源公众号ID</td>
+                            <td class="col-md-1">来源公众号ID</td>
                             <td class="col-md-1">展示类型</td>
-                            <td class="col-md-2">更多操作</td>
+                            <td class="col-md-3">更多操作</td>
                         </tr>
                     </thead>
                     <tbody>
                         {foreach $result as $key=> $value}
                         <tr>
                             <td class="col-md-1">{$value.id}</td>
-                            <td class="col-md-4">{$value.title}</td>
-                            <td class="col-md-1">{$value.date}</td>
+                            <td class="col-md-3">{$value.title}</td>
+                            <td class="col-md-3">{$value.url}</td>
                             <td class="col-md-1">{$value.sourceName}</td>
                             <td class="col-md-1">{$value.sourceNum}</td>
                             <td class="col-md-1">{$value.type == 1 ? '小图':'大图'}</td>

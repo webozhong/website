@@ -85,15 +85,29 @@ class Article extends Model {
         return $bool;
 
     }
+
     /**
-     *获取文章缩略图地址byId
-     * @param [int] $id [description]
+     * 根据文章id获得该文章的缩略图路径
+     * @param $id
+     * @return false|\PDOStatement|string|\think\Collection
      */
     public static function GetThumbnailsPath($id){
         $result = Db::table('articles')
             ->field('thumbnails')
             ->where('id',$id)
             ->select();
+        return $result;
+    }
+
+    /**
+     * @param $id
+     * @param $content
+     * @return int|string
+     */
+    public static function updateContentById($id,$content){
+        $result = Db::table('articles')
+            ->where('id',$id)
+            ->update(['content'=>$content]);
         return $result;
     }
 }

@@ -4,9 +4,7 @@ use app\api\model\User;
 use think\Controller;
 class Users extends Controller {
 
-    public function Info(){
-        phpinfo();
-    }
+
     /**
      * 小程序登录、解密、返回用户私密信息
      */
@@ -58,6 +56,7 @@ class Users extends Controller {
      * 保存用户信息接口
      * @return int|string
      */
+
     public function SaveUserInfo(){
         $openid = $_POST['openid'];
         $avatarUrl = $_POST['avatarUrl'];
@@ -67,13 +66,23 @@ class Users extends Controller {
         $nickName = $_POST['nickName'];
         $gender = $_POST['gender']; //性别 0：未知、1：男、2：女
 
-        if(!User::isExist($openid)) {
+        //如果从未登录，添加注册信息
+        if(!User::isExist($openid)){
             $result = User::addUser($openid,$avatarUrl,$city,$country,$province,$nickName,$gender);
+            return $result;
         }else{
-            $dateTime = date('Y-m-d H:i:s');
-            $result = User::updateUser($openid, $avatarUrl, $city, $country, $province, $nickName, $gender, $dateTime);
+            //检测用户是否更改了微信头像昵称等资料
+            $isSame = User::userInfoSame($openid,$avatarUrl,$city,$country,$province,$nickName,$gender);
+
+            if (!$isSame){
+                $result = User::updateUser($openid, $avatarUrl, $city, $country, $province, $nickName, $gender);
+                if($result){
+                    return '用户资料更新成功';
+                }
+            }else{
+                return '用户未更改资料,不更新数据';
+            }
         }
-        return $result;
     }
     /**
      *

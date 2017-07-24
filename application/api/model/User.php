@@ -42,6 +42,31 @@ class User extends Model{
         return $result;
     }
 
+    public static function userInfoSame($openid,$avatarUrl,$city,$country,$province,$nickName,$gender){
+
+        $userInfo = Db::table('users')
+            ->where('openid',$openid)
+            ->select();
+        $userInfo =  $userInfo[0];
+        $newUserInfo = [
+            'openid' =>$openid,
+            'avatarUrl' => $avatarUrl,
+            'city' => $city,
+            'country' => $country,
+            'province' => $province,
+            'nickName' => $nickName,
+            'gender' => $gender
+        ];
+        array_pop($userInfo);
+        //比较数据
+        if ($userInfo == $newUserInfo){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
     /**
      * 更新用户信息
      * @param $openid
@@ -54,7 +79,7 @@ class User extends Model{
      * @param $dateTime //最后登陆时间
      * @return int|string
      */
-    public static function updateUser($openid,$avatarUrl,$city,$country,$province,$nickName,$gender,$dateTime){
+    public static function updateUser($openId,$avatarUrl,$city,$country,$province,$nickName,$gender){
         $data = [
             'avatarUrl' =>$avatarUrl,
             'city' => $city,
@@ -62,10 +87,9 @@ class User extends Model{
             'province' => $province,
             'nickName' => $nickName,
             'gender' => $gender,
-            'last_login' => $dateTime,
         ];
         $result = Db::table('users')
-            ->where('openid',$openid)
+            ->where('openid',$openId)
             ->update($data);
         return $result;
     }
