@@ -11,7 +11,7 @@ class User extends Model {
     public static function ShowUsersByPage($page){
         $startPage = ($page-1)*10;
         $result = Db::table('users')
-            ->order('last_login','desc')
+            ->order('registered','desc')
             ->limit($startPage,10)
             ->select();
         return $result;
@@ -42,20 +42,12 @@ class User extends Model {
             ->select();
         return $newUsers;
     }
-    /**
-     * 获得回访用户
-     * @param $openid
-     * @return false|\PDOStatement|string|\think\Collection
-     */
-    public static function getActiveUsers($openid,$startTime,$endTime){
-        $activeUsers = Db::table('app_access')
-            ->where('openid',$openid)
-            ->whereTime('time','between',[$startTime,$endTime])
-            ->distinct(true)
+    public static function getOldUsers($endTime){
+        $newUsers = Db::table('users')
+            ->whereTime('registered','<',$endTime)
             ->field('openid')
             ->select();
-        return $activeUsers;
+        return $newUsers;
     }
-
 
 }

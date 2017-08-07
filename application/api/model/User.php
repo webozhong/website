@@ -181,4 +181,11 @@ class User extends Model{
             ->delete();
         return $result;
     }
+    public static function getUserByOpenid($openId)
+    {
+      $result = Db::table('users')
+      ->where('openid',$openId)
+      ->select();
+      return $result;
+    }
 }

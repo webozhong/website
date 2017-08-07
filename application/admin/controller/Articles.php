@@ -23,6 +23,7 @@ class Articles extends Base
         $this->assign('page',$page);
         $this->assign('pageCount',$pageCount);
         $this->assign('result',$result);
+        $this->assign('total',$total);
         return $this->fetch('/article-list');
     }
 

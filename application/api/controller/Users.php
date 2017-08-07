@@ -136,4 +136,5 @@ class Users extends Controller {
         $result = User::delCollectionRecord($openId,$articleId);
         return $result;
     }
+
 }
