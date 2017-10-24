@@ -2,13 +2,14 @@
 namespace app\api\controller;
 use app\api\model\User;
 use think\Controller;
+use think\Request;
+
 class Users extends Controller {
 
-
     /**
-     * 小程序登录、解密、返回用户私密信息
+     * 小程序登录、解密、返回用户信息
      */
-    public function Login(){
+    public function login(){
 
         //小程序APPID和AppSecret
         $APPID = 'wx71342e901702563e';
@@ -53,11 +54,10 @@ class Users extends Controller {
     }
 
     /**
-     * 保存用户信息接口
+     * 保存用户信息
      * @return int|string
      */
-
-    public function SaveUserInfo(){
+    public function saveUserInfo(){
         $openid = $_POST['openid'];
         $avatarUrl = $_POST['avatarUrl'];
         $city = $_POST['city'];
@@ -84,24 +84,49 @@ class Users extends Controller {
             }
         }
     }
+
+    /**
+     * 获取用户信息
+     * @param Request $request
+     * @return false|\PDOStatement|string|\think\Collection
+     */
+    public function getUserInfo(Request $request){
+        $result = User::getUserByOpenid($request->param('openid'));
+        return $result;
+    }
+
+    /**
+     * 更改用户状态,如果用户在弹出提示时拒绝则调用此接口
+     * @param Request $request
+     * @return int|string
+     */
+    public function reQuest(Request $request){
+        $openid = $request->post('openid');
+        if (!$openid){
+            return '不支持的请求方式';
+        }
+        $result = User::updateStatus($openid);
+        return $result;
+    }
+
     /**
      *
-     * 获取单个用户收藏列表接口
+     * 获取单个用户收藏列表
      */
-    public function CollectionList(){
+    public function collectionList(){
         $openId = $_POST['openid'];
         $result = User::getUserCollectionList($openId);
         foreach ($result as $item=>$value){
-            $v = substr($value['thumbnails'],0,19);
+            $v = substr($value['thumbnails'],0,18);
             $result["$item"]["thumbnails"]=$v;
         }
         return $result;
     }
 
     /**
-     * 用户文章收藏状态接口
+     * 用户文章收藏状态
      */
-    public function IsCollection(){
+    public function isCollection(){
         $openId = $_POST['openid'];
         $articleId = $_POST['articleid'];
         $articleId = intval($articleId);
@@ -110,9 +135,9 @@ class Users extends Controller {
     }
 
     /**
-     * 保存用户收藏记录接口
+     * 保存用户收藏记录
      */
-    public function SaveUserCollection(){
+    public function saveUserCollection(){
         $openId = $_POST['openid'];
         $articleId = $_POST['articleid'];
         $result = User::saveCollectionRecord($openId,$articleId);
@@ -120,21 +145,21 @@ class Users extends Controller {
     }
 
     /**
-     * 单篇文章总收藏数接口
+     * 单篇文章总收藏数
      */
-    public function CollectionNum(){
+    public function collectionNum(){
         $articleId = $_POST['articleid'];
         $result = User::articleCollectionCount($articleId);
         return $result;
     }
+
     /**
-     * 删除用户收藏记录接口
+     * 删除用户收藏记录
      */
-    public function DelUserCollection(){
+    public function delUserCollection(){
         $openId = $_POST['openid'];
         $articleId = $_POST['articleid'];
         $result = User::delCollectionRecord($openId,$articleId);
         return $result;
     }
-
 }

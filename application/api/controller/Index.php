@@ -1,6 +1,5 @@
 <?php
 namespace app\api\controller;
-
 use app\api\model\Article;
 use think\Controller;
 
@@ -9,7 +8,7 @@ class Index extends Controller
     /**首页内容接口
      * @return array
      */
-    public function Index()
+    public function index()
     {
         $page=$_GET['page'];
         $total = Article::GetNum();
@@ -36,7 +35,7 @@ class Index extends Controller
     /**
      * 用户反馈保存接口
      */
-    public function SaveFeedback(){
+    public function saveFeedback(){
         $data = $_POST;
         if(!isset($data['message']) && !isset($data['number'])){
             return false;

@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/vendor/PHPMailer/.github" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/PHPMailer/.phan" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/PHPMailer/language" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/PHPMailer/src" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpmailer/phpmailer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/topthink/think-installer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/xiang1993/wechatapp-decrypt" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="demo" />
+    <orderEntry type="module-library">
+      <library name="PHP" type="php">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/vendor/composer" />
+          <root url="file://$MODULE_DIR$/vendor/phpmailer/phpmailer" />
+          <root url="file://$MODULE_DIR$/vendor/topthink/think-installer" />
+          <root url="file://$MODULE_DIR$/vendor/xiang1993/wechatapp-decrypt" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/vendor/composer" />
+          <root url="file://$MODULE_DIR$/vendor/phpmailer/phpmailer" />
+          <root url="file://$MODULE_DIR$/vendor/topthink/think-installer" />
+          <root url="file://$MODULE_DIR$/vendor/xiang1993/wechatapp-decrypt" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module" module-name="sample" />
   </component>
 </module>

@@ -1,9 +1,12 @@
 <?php
+
 namespace app\api\model;
+
 use think\Db;
 use think\Model;
 
-class User extends Model{
+class User extends Model
+{
 
     /**
      * 新增用户信息
@@ -16,10 +19,11 @@ class User extends Model{
      * @param $gender
      * @return int|string
      */
-    public static function addUser($openid,$avatarUrl,$city,$country,$province,$nickName,$gender){
+    public static function addUser($openid, $avatarUrl, $city, $country, $province, $nickName, $gender)
+    {
         $data = [
-            'openid'=>$openid,
-            'avatarUrl' =>$avatarUrl,
+            'openid' => $openid,
+            'avatarUrl' => $avatarUrl,
             'city' => $city,
             'country' => $country,
             'province' => $province,
@@ -35,21 +39,33 @@ class User extends Model{
      * @param $openId
      * @return int|string
      */
-    public static function isExist($openId){
-        $result  = Db::table('users')
-            ->where('openid',$openId)
+    public static function isExist($openId)
+    {
+        $result = Db::table('users')
+            ->where('openid', $openId)
             ->count();
         return $result;
     }
 
-    public static function userInfoSame($openid,$avatarUrl,$city,$country,$province,$nickName,$gender){
-
+    /**
+     * 判断用户是否更新信息
+     * @param $openid
+     * @param $avatarUrl
+     * @param $city
+     * @param $country
+     * @param $province
+     * @param $nickName
+     * @param $gender
+     * @return bool
+     */
+    public static function userInfoSame($openid, $avatarUrl, $city, $country, $province, $nickName, $gender)
+    {
         $userInfo = Db::table('users')
-            ->where('openid',$openid)
+            ->where('openid', $openid)
             ->select();
-        $userInfo =  $userInfo[0];
+        $userInfo = $userInfo[0];
         $newUserInfo = [
-            'openid' =>$openid,
+            'openid' => $openid,
             'avatarUrl' => $avatarUrl,
             'city' => $city,
             'country' => $country,
@@ -59,9 +75,9 @@ class User extends Model{
         ];
         array_pop($userInfo);
         //比较数据
-        if ($userInfo == $newUserInfo){
+        if ($userInfo == $newUserInfo) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -69,19 +85,19 @@ class User extends Model{
 
     /**
      * 更新用户信息
-     * @param $openid
+     * @param $openId
      * @param $avatarUrl
      * @param $city
      * @param $country
      * @param $province
      * @param $nickName
      * @param $gender
-     * @param $dateTime //最后登陆时间
      * @return int|string
      */
-    public static function updateUser($openId,$avatarUrl,$city,$country,$province,$nickName,$gender){
+    public static function updateUser($openId, $avatarUrl, $city, $country, $province, $nickName, $gender)
+    {
         $data = [
-            'avatarUrl' =>$avatarUrl,
+            'avatarUrl' => $avatarUrl,
             'city' => $city,
             'country' => $country,
             'province' => $province,
@@ -89,7 +105,7 @@ class User extends Model{
             'gender' => $gender,
         ];
         $result = Db::table('users')
-            ->where('openid',$openId)
+            ->where('openid', $openId)
             ->update($data);
         return $result;
     }
@@ -98,27 +114,28 @@ class User extends Model{
      * @param $openId
      * @return false|\PDOStatement|string|\think\Collection
      */
-    public static function getUserCollectionList($openId){
+    public static function getUserCollectionList($openId)
+    {
         $artList = Db::table('collections')
-            ->where('openid',$openId)
+            ->where('openid', $openId)
             ->field('id,articleid')
-            ->order('id','desc')
+            ->order('id', 'desc')
             ->select();
-        if($artList){
+        if ($artList) {
             //构建sql语句
             $sql = "select id,title,thumbnails from articles where id in(";
-            foreach ($artList as $item){
+            foreach ($artList as $item) {
                 $value = $item['articleid'];
-                $sql .="$value,";
+                $sql .= "$value,";
             }
-            $sql = substr($sql,0,-1);
-            $sql .=")order by field(id,";
-            foreach($artList as $item){
+            $sql = substr($sql, 0, -1);
+            $sql .= ")order by field(id,";
+            foreach ($artList as $item) {
                 $value = $item['articleid'];
-                $sql .="$value,";
+                $sql .= "$value,";
             }
-            $sql = substr($sql,0,-1);
-            $sql.=")";
+            $sql = substr($sql, 0, -1);
+            $sql .= ")";
             $result = Db::query($sql);
             return $result;
         }
@@ -132,10 +149,11 @@ class User extends Model{
      * @param $articleId
      * @return int|string
      */
-    public static function collectionStatus($openId,$articleId){
+    public static function collectionStatus($openId, $articleId)
+    {
         $result = Db::table('collections')
-            ->where('openid',$openId)
-            ->where('articleid',$articleId)
+            ->where('openid', $openId)
+            ->where('articleid', $articleId)
             ->count();
         return $result;
     }
@@ -146,7 +164,8 @@ class User extends Model{
      * @param $articleId
      * @return int|string
      */
-    public static function saveCollectionRecord($openId,$articleId){
+    public static function saveCollectionRecord($openId, $articleId)
+    {
         $data = [
             'openid' => $openId,
             'articleid' => $articleId,
@@ -161,9 +180,10 @@ class User extends Model{
      * @param $articleId
      * @return int|string
      */
-    public static function articleCollectionCount($articleId){
+    public static function articleCollectionCount($articleId)
+    {
         $result = Db::table('collections')
-            ->where('articleid',$articleId)
+            ->where('articleid', $articleId)
             ->count();
         return $result;
     }
@@ -174,18 +194,40 @@ class User extends Model{
      * @param $articleId
      * @return int
      */
-    public static function delCollectionRecord($openId,$articleId){
+    public static function delCollectionRecord($openId, $articleId)
+    {
         $result = Db::table('collections')
-            ->where('openid',$openId)
-            ->where('articleid',$articleId)
+            ->where('openid', $openId)
+            ->where('articleid', $articleId)
             ->delete();
         return $result;
     }
+
+    /**
+     * 根据openid返回用户信息
+     * @param $openId
+     * @return false|\PDOStatement|string|\think\Collection
+     */
     public static function getUserByOpenid($openId)
     {
-      $result = Db::table('users')
-      ->where('openid',$openId)
-      ->select();
-      return $result;
+        $result = Db::table('users')
+            ->where('openid', $openId)
+            ->select();
+        return $result;
+    }
+
+    /**
+     * 更新问卷状态
+     * @param $openid
+     * @return int|string
+     */
+    public static function updateStatus($openid){
+        $data = [
+            'status' => 1
+        ];
+        $result = Db::table('users')
+            ->where('openid', $openid)
+            ->update($data);
+        return $result;
     }
 }
